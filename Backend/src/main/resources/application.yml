@@ -1,4 +1,11 @@
 spring:
+  # Explicitly import Backend/.env (relative to wherever the JVM is started
+  # from) as a property source, instead of relying on Spring Boot's implicit
+  # .env auto-detection - that behavior is undocumented enough across
+  # versions/launch methods to be worth pinning down explicitly.
+  config:
+    import: "optional:file:.env[.properties]"
+
   application:
     name: ordering-system
 
