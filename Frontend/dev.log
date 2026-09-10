@@ -1,0 +1,172 @@
+
+> ordering-system-frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://169.254.83.107:3000
+- Environments: .env
+✓ Ready in 1203ms
+✓ Running next.config.ts took 27ms
+
+✓ Generated AGENTS.md and CLAUDE.md for AI agents. Set `agentRules: false` in next.config to disable.
+ GET / 200 in 2.6s (next.js: 2.4s, application-code: 205ms)
+ GET / 200 in 51ms (next.js: 16ms, application-code: 35ms)
+ GET /products 200 in 364ms (next.js: 342ms, application-code: 22ms)
+ GET /products 200 in 28ms (next.js: 3ms, application-code: 25ms)
+ GET / 200 in 17ms (next.js: 3ms, application-code: 14ms)
+ GET /products 200 in 19ms (next.js: 5ms, application-code: 14ms)
+ GET / 200 in 19ms (next.js: 3ms, application-code: 16ms)
+ GET /register 200 in 675ms (next.js: 641ms, application-code: 34ms)
+ GET / 200 in 70ms (next.js: 15ms, application-code: 55ms)
+ GET / 200 in 41ms (next.js: 3ms, application-code: 39ms)
+ GET / 200 in 44ms (next.js: 5ms, application-code: 39ms)
+ GET /login 200 in 678ms (next.js: 528ms, application-code: 150ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="login/page...">
+      <SegmentTrieNode>
+      <ClientPageRoot Component={function LoginPage} serverProvidedParams={{...}}>
+        <LoginPage params={Promise} searchParams={Promise}>
+          <main className="flex flex-...">
+            <Card className="w-full max...">
+              <div data-slot="card" data-size="default" className={"group/ca..."}>
+                <CardHeader>
+                <CardContent>
+                  <div data-slot="card-content" className="px-(--card...">
+                    <form onSubmit={function} noValidate={true} className="space-y-4">
+                      <FormField label="Email" htmlFor="email" error={undefined}>
+                        <div className="space-y-1.5">
+                          <Label>
+                          <Input id="email" type="email" autoComplete="email" name="email" onChange={function onChange} ...>
+                            <Input type="email" data-slot="input" className="h-8 w-full..." id="email" ...>
+                              <FieldControl ref={function ref} type="email" data-slot="input" className="h-8 w-full..." ...>
+                                <input
+                                  id="email"
+                                  disabled={false}
+                                  name="email"
+                                  ref={function}
+                                  aria-labelledby={undefined}
+                                  autoFocus={false}
+                                  defaultValue={undefined}
+                                  onChange={function}
+                                  onFocus={function}
+                                  onBlur={function}
+                                  onKeyDown={function}
+                                  type="email"
+                                  data-slot="input"
+                                  autoComplete="email"
+                                  className="h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 p..."
+-                                 style={{caret-color:"transparent"}}
+                                >
+                      <FormField label="Password" htmlFor="password" error={undefined}>
+                        <div className="space-y-1.5">
+                          <Label>
+                          <Input id="password" type="password" autoComplete="current-pa..." name="password" ...>
+                            <Input type="password" data-slot="input" className="h-8 w-full..." id="password" ...>
+                              <FieldControl ref={function ref} type="password" data-slot="input" ...>
+                                <input
+                                  id="password"
+                                  disabled={false}
+                                  name="password"
+                                  ref={function}
+                                  aria-labelledby={undefined}
+                                  autoFocus={false}
+                                  defaultValue={undefined}
+                                  onChange={function}
+                                  onFocus={function}
+                                  onBlur={function}
+                                  onKeyDown={function}
+                                  type="password"
+                                  data-slot="input"
+                                  autoComplete="current-password"
+                                  className="h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 p..."
+-                                 style={{caret-color:"transparent"}}
+                                >
+                      ...
+                    ...
+    ...
+ 
+ GET / 200 in 33ms (next.js: 7ms, application-code: 26ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at DropdownMenuLabel (src/components/ui/dropdown-menu.tsx:63:5)
+    at Navbar (src/components/layout/navbar.tsx:75:17)
+    at RootLayout (src\app\layout.tsx:39:17)
+  61 | }) {
+  62 |   return (
+> 63 |     <MenuPrimitive.GroupLabel
+     |     ^
+  64 |       data-slot="dropdown-menu-label"
+  65 |       data-inset={inset}
+  66 |       className={cn(
+ GET /? 200 in 83ms (next.js: 5ms, application-code: 78ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at DropdownMenuLabel (src/components/ui/dropdown-menu.tsx:63:5)
+    at Navbar (src/components/layout/navbar.tsx:75:17)
+    at RootLayout (src\app\layout.tsx:39:17)
+  61 | }) {
+  62 |   return (
+> 63 |     <MenuPrimitive.GroupLabel
+     |     ^
+  64 |       data-slot="dropdown-menu-label"
+  65 |       data-inset={inset}
+  66 |       className={cn(
+ GET /? 200 in 60ms (next.js: 4ms, application-code: 56ms)
+ GET /products 200 in 44ms (next.js: 11ms, application-code: 33ms)
+ GET / 200 in 28ms (next.js: 5ms, application-code: 23ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at DropdownMenuLabel (src/components/ui/dropdown-menu.tsx:63:5)
+    at Navbar (src/components/layout/navbar.tsx:75:17)
+    at RootLayout (src\app\layout.tsx:39:17)
+  61 | }) {
+  62 |   return (
+> 63 |     <MenuPrimitive.GroupLabel
+     |     ^
+  64 |       data-slot="dropdown-menu-label"
+  65 |       data-inset={inset}
+  66 |       className={cn(
+✓ Compiled in 101ms
+ GET / 200 in 49ms (next.js: 6ms, application-code: 43ms)
+ GET / 200 in 25ms (next.js: 7ms, application-code: 18ms)
+✓ Compiled in 218ms
+ GET / 200 in 21ms (next.js: 5ms, application-code: 16ms)
+✓ Compiled in 50ms
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at DropdownMenuLabel (src/components/ui/dropdown-menu.tsx:63:5)
+    at Navbar (src/components/layout/navbar.tsx:76:17)
+    at RootLayout (src\app\layout.tsx:39:17)
+  61 | }) {
+  62 |   return (
+> 63 |     <MenuPrimitive.GroupLabel
+     |     ^
+  64 |       data-slot="dropdown-menu-label"
+  65 |       data-inset={inset}
+  66 |       className={cn(
+ GET /? 200 in 85ms (next.js: 6ms, application-code: 79ms)
+[browser] Uncaught Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at DropdownMenuLabel (src/components/ui/dropdown-menu.tsx:63:5)
+    at Navbar (src/components/layout/navbar.tsx:75:17)
+    at RootLayout (src\app\layout.tsx:39:17)
+  61 | }) {
+  62 |   return (
+> 63 |     <MenuPrimitive.GroupLabel
+     |     ^
+  64 |       data-slot="dropdown-menu-label"
+  65 |       data-inset={inset}
+  66 |       className={cn(
+✓ Compiled in 81ms
+ GET / 200 in 46ms (next.js: 8ms, application-code: 38ms)
+ GET / 200 in 88ms (next.js: 8ms, application-code: 80ms)
+ GET /orders 200 in 515ms (next.js: 482ms, application-code: 33ms)
+ GET / 200 in 31ms (next.js: 7ms, application-code: 24ms)
