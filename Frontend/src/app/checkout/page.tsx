@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useAuth } from "@/lib/auth/auth-context";
+import { useRequireAuth } from "@/hooks/use-require-auth";
 import { useCart } from "@/lib/cart/cart-context";
 import { useCreateOrder } from "@/hooks/use-orders";
 import { ApiError } from "@/lib/api/client";
@@ -15,16 +15,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { user, isLoading: isAuthLoading } = useAuth();
+  const { user, isLoading: isAuthLoading } = useRequireAuth();
   const { items, subtotal, clear } = useCart();
   const createOrder = useCreateOrder();
   const [isPlacing, setIsPlacing] = useState(false);
-
-  useEffect(() => {
-    if (!isAuthLoading && !user) {
-      router.replace("/login?redirect=/checkout");
-    }
-  }, [isAuthLoading, user, router]);
 
   if (isAuthLoading || !user) {
     return (
