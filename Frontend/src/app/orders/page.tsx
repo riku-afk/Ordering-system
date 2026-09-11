@@ -56,7 +56,7 @@ export default function OrdersPage() {
 
       {!isLoading && data && data.content.length > 0 && (
         <>
-          <div className="space-y-3" aria-busy={isFetching}>
+          <div className="flex flex-col gap-3" aria-busy={isFetching}>
             {data.content.map((order) => (
               <OrderSummaryCard key={order.id} order={order} />
             ))}

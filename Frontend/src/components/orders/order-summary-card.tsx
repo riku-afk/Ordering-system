@@ -9,7 +9,7 @@ export function OrderSummaryCard({ order }: { order: OrderResponse }) {
   const itemsPreview = order.items.map((item) => `${item.quantity}× ${item.productName}`).join(", ");
 
   return (
-    <Link href={`/orders/${order.id}`}>
+    <Link href={`/orders/${order.id}`} className="block">
       <Card className="transition-colors hover:bg-muted/50">
         <CardContent className="flex items-center justify-between gap-4">
           <div className="min-w-0">
