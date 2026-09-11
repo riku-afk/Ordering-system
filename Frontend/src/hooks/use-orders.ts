@@ -1,6 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth/auth-context";
-import { createOrder, fetchOrder, fetchOrders, type CreateOrderItem } from "@/lib/api/orders";
+import {
+  createOrder,
+  fetchOrder,
+  fetchOrders,
+  updateOrderStatus,
+  type CreateOrderItem,
+} from "@/lib/api/orders";
+import type { OrderStatus } from "@/lib/api/types";
 
 export function useOrders(page: number, size = 10) {
   const { token } = useAuth();
@@ -30,6 +37,23 @@ export function useCreateOrder() {
         throw new Error("You must be signed in to place an order.");
       }
       return createOrder(items, token);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
+}
+
+export function useUpdateOrderStatus() {
+  const { token } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, status }: { id: number; status: OrderStatus }) => {
+      if (!token) {
+        throw new Error("You must be signed in to do that.");
+      }
+      return updateOrderStatus(id, status, token);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });

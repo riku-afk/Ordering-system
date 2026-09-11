@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api/client";
-import type { OrderResponse, PageResponse } from "@/lib/api/types";
+import type { OrderResponse, OrderStatus, PageResponse } from "@/lib/api/types";
 
 export interface CreateOrderItem {
   productId: number;
@@ -23,4 +23,12 @@ export function fetchOrders(
 
 export function fetchOrder(id: number, token: string): Promise<OrderResponse> {
   return apiClient.get<OrderResponse>(`/api/orders/${id}`, { token });
+}
+
+export function updateOrderStatus(
+  id: number,
+  status: OrderStatus,
+  token: string,
+): Promise<OrderResponse> {
+  return apiClient.patch<OrderResponse>(`/api/orders/${id}/status`, { status }, { token });
 }

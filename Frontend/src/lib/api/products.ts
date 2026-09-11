@@ -23,3 +23,34 @@ export function fetchProducts(query: ProductQuery = {}): Promise<PageResponse<Pr
 export function fetchProduct(id: number): Promise<ProductResponse> {
   return apiClient.get<ProductResponse>(`/api/products/${id}`);
 }
+
+export interface ProductPayload {
+  categoryId: number;
+  name: string;
+  description?: string | null;
+  price: number;
+  imageUrl?: string | null;
+}
+
+export function createProduct(
+  payload: ProductPayload & { available?: boolean },
+  token: string,
+): Promise<ProductResponse> {
+  return apiClient.post<ProductResponse>("/api/products", payload, { token });
+}
+
+export function updateProduct(
+  id: number,
+  payload: ProductPayload,
+  token: string,
+): Promise<ProductResponse> {
+  return apiClient.put<ProductResponse>(`/api/products/${id}`, payload, { token });
+}
+
+export function updateProductAvailability(
+  id: number,
+  available: boolean,
+  token: string,
+): Promise<ProductResponse> {
+  return apiClient.patch<ProductResponse>(`/api/products/${id}/availability`, { available }, { token });
+}
