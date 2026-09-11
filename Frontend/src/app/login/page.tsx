@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,14 +15,24 @@ import { FormField } from "@/components/ui/form-field";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const loginSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Enter a valid email address"),
+  email: z.email("Enter a valid email address").min(1, "Email is required"),
   password: z.string().min(1, "Password is required"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginPageContent />
+    </Suspense>
+  );
+}
+
+function LoginPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
   const { login } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,7 +47,7 @@ export default function LoginPage() {
     try {
       await login(values.email, values.password);
       toast.success("Welcome back!");
-      router.push("/");
+      router.push(redirectTo);
     } catch (error) {
       toast.error(error instanceof ApiError ? error.message : "Something went wrong. Please try again.");
     } finally {
@@ -66,7 +76,10 @@ export default function LoginPage() {
           </form>
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="font-medium text-foreground underline underline-offset-4">
+            <Link
+              href={redirectTo === "/" ? "/register" : `/register?redirect=${encodeURIComponent(redirectTo)}`}
+              className="font-medium text-foreground underline underline-offset-4"
+            >
               Create one
             </Link>
           </p>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,14 +16,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const registerSchema = z.object({
   name: z.string().min(1, "Name is required").max(100, "Must be at most 100 characters"),
-  email: z.string().min(1, "Email is required").email("Enter a valid email address"),
+  email: z.email("Enter a valid email address").min(1, "Email is required"),
   password: z.string().min(8, "Must be at least 8 characters"),
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterPageContent />
+    </Suspense>
+  );
+}
+
+function RegisterPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
   const { register: registerUser } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,7 +48,7 @@ export default function RegisterPage() {
     try {
       await registerUser(values.name, values.email, values.password);
       toast.success("Account created!");
-      router.push("/");
+      router.push(redirectTo);
     } catch (error) {
       toast.error(error instanceof ApiError ? error.message : "Something went wrong. Please try again.");
     } finally {
@@ -70,7 +80,10 @@ export default function RegisterPage() {
           </form>
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-foreground underline underline-offset-4">
+            <Link
+              href={redirectTo === "/" ? "/login" : `/login?redirect=${encodeURIComponent(redirectTo)}`}
+              className="font-medium text-foreground underline underline-offset-4"
+            >
               Sign in
             </Link>
           </p>
